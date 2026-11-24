@@ -55,7 +55,7 @@ function App() {
   return <div className="app-shell">
     <header className="topbar">
       <button className="brand" onClick={() => navigate("/")}><span className="brand-mark"><Gamepad2 size={22}/></span><span>NETLIFY <b>GAMES</b></span></button>
-      <nav className="top-nav"><NavLink to="/">STORE</NavLink><NavLink to="/library">LIBRARY</NavLink><NavLink to="/downloads">DOWNLOADS</NavLink></nav>
+      <nav className="top-nav"><NavLink to="/" end>STORE</NavLink><NavLink to="/library">LIBRARY</NavLink><NavLink to="/downloads">DOWNLOADS</NavLink></nav>
       <div className="top-actions"><label className="searchbox"><Search size={16}/><input value={query} onChange={e => setQuery(e.target.value)} placeholder="Search games"/></label><button className="icon-button" onClick={() => navigate("/settings")} aria-label="Settings"><Settings size={19}/></button></div>
     </header>
     <div className="body-layout">
