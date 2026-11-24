@@ -1,7 +1,7 @@
 import type { CapacitorConfig } from "@capacitor/cli";
 
 const config: CapacitorConfig = {
-  appId: "com.netlifynetwork.netlif ygames".replace(" ", ""),
+  appId: "com.netlifynetwork.netlifygames",
   appName: "Netlify Games",
   webDir: "dist"
 };
