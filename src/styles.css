@@ -73,3 +73,40 @@
 @media(min-width:420px) and (max-width:760px){
   .game-card>img{height:135px}
 }
+
+
+/* Shared Steam-inspired visual system for Windows and Android */
+:root{color-scheme:dark;--steam-bg:#1b2838;--steam-panel:#171a21;--steam-panel2:#202d3d;--steam-blue:#66c0f4;--steam-text:#c7d5e0}
+body{background:var(--steam-bg);color:var(--steam-text)}
+.topbar{background:var(--steam-panel);border-bottom:1px solid #26384a;box-shadow:0 3px 14px #0003}
+.brand-mark{background:linear-gradient(145deg,#66c0f4,#1a6eaa);color:#10202d}
+.brand b{color:var(--steam-blue)}
+.top-nav a{font-size:12px;letter-spacing:1.15px;color:#a9b8c6}
+.top-nav a.active,.top-nav a:hover{color:#fff;border-color:var(--steam-blue)}
+.sidebar{background:#182330;border-right-color:#2a4054}
+.sidebar>a.active,.sidebar>a:hover{background:linear-gradient(90deg,#29445a,#203448);color:#fff}
+.sidebar>a.active svg{color:var(--steam-blue)}
+.main-content{background:linear-gradient(180deg,#1b2838 0%,#182432 100%)}
+.page-heading h1 span{color:var(--steam-blue)}
+.eyebrow{color:#66a9d5}
+.hero{border:1px solid #3a536a;border-radius:3px;box-shadow:0 14px 36px #07111d99}
+.hero-kicker{color:#9bd7f5}
+.primary-button{background:linear-gradient(90deg,#75b022,#5b8f1b);color:#eaf5e1;border-radius:2px}
+.primary-button:hover{background:linear-gradient(90deg,#8acb2c,#6ba51f)}
+.secondary-button{background:#26394b;border-color:#405b72;border-radius:2px;color:#dce9f2}
+.game-card{background:#182635;border-color:#30465a;border-radius:2px}
+.game-card:hover{border-color:#66c0f4;transform:translateY(-2px)}
+.game-card-meta span{color:#a4d7f4}
+.category-tile{background:linear-gradient(120deg,#29445a,#1c2d3e);border-color:#38536a;border-radius:2px}
+.detail-banner{border-bottom:1px solid #31485d}
+.purchase-panel,.download-toolbar,.library-row,.download-item,.settings-card,.detail-facts{background:#192a3a;border-color:#344c61;border-radius:2px}
+.searchbox{background:#0f1924;border-color:#344b60;border-radius:2px}
+.searchbox:focus-within{border-color:#66c0f4}
+.toast{border-radius:2px}
+@media(max-width:760px){
+  .topbar{background:#171a21}
+  .top-nav{background:#171a21;border-top-color:#344b60}
+  .top-nav a.active{border-top-color:var(--steam-blue)}
+  .hero{border-radius:2px}
+  .game-card{border-radius:2px}
+}
