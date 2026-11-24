@@ -1,0 +1,12 @@
+export interface Game {
+  id: string; title: string; genre: string; price: number; rating: string; description: string;
+  image: string; banner: string; developer: string; release: string; size: string;
+  downloadUrl?: string; filename?: string; tags: string[];
+}
+export const games: Game[] = [
+  { id: "emberfall", title: "Emberfall", genre: "Adventure RPG", price: 0, rating: "Very Positive", developer: "Northstar Studio", release: "2025", size: "18 GB", image: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=700&q=85", banner: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=1600&q=90", description: "Journey through a forgotten world reclaimed by nature. Explore ancient ruins, meet strange allies and uncover the story buried beneath the ashes.", tags: ["Open World", "Story Rich", "Exploration"] },
+  { id: "neon-drift", title: "Neon Drift", genre: "Racing", price: 4.99, rating: "Overwhelmingly Positive", developer: "Velocity Works", release: "2025", size: "9 GB", image: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=700&q=85", banner: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1600&q=90", description: "Own the night in a high-speed street racing experience. Tune your ride, master tight corners and build your reputation across the city.", tags: ["Racing", "Multiplayer", "Driving"] },
+  { id: "iron-tide", title: "Iron Tide", genre: "Action Strategy", price: 0, rating: "Mostly Positive", developer: "Black Anchor", release: "2024", size: "12 GB", image: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=700&q=85", banner: "https://images.unsplash.com/photo-1519608487953-e999c86e7455?w=1600&q=90", description: "Command a fleet on a hostile ocean. Build your base, manage resources and outsmart rival commanders in tactical naval battles.", tags: ["Strategy", "Action", "Tactical"] },
+  { id: "wildlands", title: "Wildlands: Reborn", genre: "Survival", price: 14.99, rating: "Very Positive", developer: "Pinecone Interactive", release: "2026", size: "26 GB", image: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=700&q=85", banner: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=1600&q=90", description: "Survive in a vast untamed wilderness. Craft tools, build shelter and discover what happened to the people who lived here before.", tags: ["Survival", "Crafting", "Co-op"] }
+];
+export const formatPrice = (price: number) => price === 0 ? "Free" : `$${price.toFixed(2)}`;
