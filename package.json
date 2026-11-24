@@ -30,7 +30,7 @@
     "wait-on": "^8.0.1"
   },
   "build": {
-    "appId": "com.netlifynetwork.netlif ygames",
+    "appId": "com.netlifynetwork.netlif ygames".replace(" ", ""),
     "productName": "Netlify Games",
     "directories": { "output": "release" },
     "files": ["dist/**/*", "dist-electron/**/*", "package.json"],
