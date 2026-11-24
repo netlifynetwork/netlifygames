@@ -94,7 +94,7 @@ function GameCard({ game, onAdd }: { game: Game; onAdd: (game: Game) => void }) 
 function StorePage({ games: visibleGames, onAdd, onDownload }: { games: Game[]; onAdd: (game: Game) => void; onDownload: (game: Game) => void }) {
   const featured = games[0];
   return <div className="page-wrap">
-    <div className="page-heading"><div><div className="eyebrow">YOUR NEXT ADVENTURE STARTS HERE</div><h1>Discover your next <span>favorite game.</span></h1><p>Explore new worlds, find your next challenge and build your collection.</p></div><div className="platform-pill"><MonitorDown size={16}/> WINDOWS STORE</div></div>
+    <div className="page-heading"><div><div className="eyebrow">YOUR NEXT ADVENTURE STARTS HERE</div><h1>Discover your next <span>favorite game.</span></h1><p>Explore new worlds, find your next challenge and build your collection.</p></div><div className="platform-pill"><MonitorDown size={16}/> PC & MOBILE STORE</div></div>
     <section className="hero" style={{ backgroundImage: `linear-gradient(90deg,rgba(8,13,20,.96) 0%,rgba(8,13,20,.72) 48%,rgba(8,13,20,.08) 100%),url(${featured.banner})` }}>
       <div className="hero-content"><span className="hero-kicker"><Sparkles size={14}/> FEATURED GAME</span><h2>{featured.title}</h2><p>{featured.description}</p><div className="hero-tags">{featured.tags.map(tag => <span key={tag}>{tag}</span>)}</div><div className="hero-buttons"><button className="primary-button" onClick={() => onDownload(featured)}><ArrowDownToLine size={17}/> {featured.price === 0 ? "Get game" : "Buy now"} · {formatPrice(featured.price)}</button><button className="secondary-button" onClick={() => onAdd(featured)}>Add to library</button></div></div>
       <div className="hero-index">01 <span>/ 04</span></div>
@@ -138,7 +138,7 @@ function DownloadsPage({ downloads, folder, onFolder }: { downloads: DownloadRow
 function formatBytes(bytes: number) { if (!bytes) return "0 B"; const units=["B","KB","MB","GB"]; const i=Math.min(Math.floor(Math.log(bytes)/Math.log(1024)),3); return `${(bytes/Math.pow(1024,i)).toFixed(1)} ${units[i]}`; }
 
 function SettingsPage({ folder, onFolder }: { folder: string; onFolder: () => void }) {
-  return <div className="page-wrap"><div className="eyebrow">PREFERENCES</div><h1 className="page-title">Settings</h1><p className="page-subtitle">Configure your Netlify Games experience.</p><div className="settings-card"><div><h3>Download location</h3><p>Choose where game installers and files are saved.</p><code>{folder}</code></div><button className="secondary-button" onClick={onFolder}><FolderOpen size={16}/> Browse</button></div><div className="settings-card"><div><h3>About Netlify Games</h3><p>Version 0.1.0 · Windows desktop</p><p className="muted">A home for discovering and managing your PC games.</p></div><Gamepad2 size={28} className="settings-logo"/></div></div>;
+  return <div className="page-wrap"><div className="eyebrow">PREFERENCES</div><h1 className="page-title">Settings</h1><p className="page-subtitle">Configure your Netlify Games experience.</p><div className="settings-card"><div><h3>Download location</h3><p>Choose where game installers and files are saved.</p><code>{folder}</code></div><button className="secondary-button" onClick={onFolder}><FolderOpen size={16}/> Browse</button></div><div className="settings-card"><div><h3>About Netlify Games</h3><p>Version 0.1.0 · Windows + Android</p><p className="muted">A shared game store and library for Windows and Android.</p></div><Gamepad2 size={28} className="settings-logo"/></div></div>;
 }
 
 export default App;
