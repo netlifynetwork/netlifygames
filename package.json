@@ -2,19 +2,22 @@
   "name": "netlify-games",
   "version": "0.1.0",
   "private": true,
-  "description": "Netlify Games desktop game store and launcher",
+  "description": "Netlify Games store for Android and Windows",
   "main": "dist-electron/main.js",
   "scripts": {
     "dev": "concurrently -k \"vite --host 127.0.0.1\" \"wait-on http://127.0.0.1:5173 && cross-env VITE_DEV_SERVER_URL=http://127.0.0.1:5173 electron .\"",
-    "build": "tsc --noEmit && vite build && tsc -p electron/tsconfig.json",
+    "build": "npm run build:web && tsc -p electron/tsconfig.json",
     "start": "electron .",
-    "dist": "npm run build && electron-builder --win nsis --publish never"
+    "dist": "npm run build && electron-builder --win nsis --publish never",
+    "build:web": "tsc --noEmit && vite build",
+    "android:sync": "npm run build:web && cap sync android"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.28.0"
+    "react-router-dom": "^6.28.0",
+    "@capacitor/core": "^7.4.3"
   },
   "devDependencies": {
     "@types/node": "^22.10.2",
@@ -27,14 +30,29 @@
     "electron-builder": "^25.1.8",
     "typescript": "^5.7.2",
     "vite": "^6.0.5",
-    "wait-on": "^8.0.1"
+    "wait-on": "^8.0.1",
+    "@capacitor/cli": "^7.4.3"
   },
   "build": {
     "appId": "com.netlifynetwork.netlifygames",
     "productName": "Netlify Games",
-    "directories": { "output": "release" },
-    "files": ["dist/**/*", "dist-electron/**/*", "package.json"],
-    "win": { "target": ["nsis"], "artifactName": "Netlify-Games-Setup-${version}.${ext}" },
-    "nsis": { "oneClick": false, "allowToChangeInstallationDirectory": true }
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "dist-electron/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "artifactName": "Netlify-Games-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
   }
 }
