@@ -6,6 +6,7 @@ import { randomUUID } from "node:crypto";
 let mainWindow: BrowserWindow | null = null;
 let downloadDirectory = path.join(app.getPath("downloads"), "Netlify Games");
 const activeDownloads = new Map<string, Electron.DownloadItem>();
+const pendingFilenames: string[] = [];
 
 function sendUpdate(payload: DownloadUpdate) {
   if (mainWindow && !mainWindow.isDestroyed()) mainWindow.webContents.send("downloads:update", payload);
@@ -34,7 +35,8 @@ app.whenReady().then(() => {
 
   session.defaultSession.on("will-download", (_event, item) => {
     const id = randomUUID();
-    const filename = item.getFilename();
+    const requestedFilename = pendingFilenames.shift();
+    const filename = requestedFilename || item.getFilename();
     item.setSavePath(path.join(downloadDirectory, filename));
     activeDownloads.set(id, item);
     const update = (state: DownloadUpdate["state"]) => sendUpdate({
@@ -52,10 +54,12 @@ app.whenReady().then(() => {
 
   ipcMain.handle("downloads:start", async (_event, args: { url: string; filename: string }) => {
     if (!/^https:\/\//i.test(args.url)) throw new Error("Downloads must use a secure HTTPS URL.");
-    if (!args.filename || args.filename.includes("/") || args.filename.includes("\\\\")) throw new Error("Invalid download filename.");
+    if (!args.filename || path.basename(args.filename) !== args.filename || args.filename.includes("\\\\")) throw new Error("Invalid download filename.");
     const win = BrowserWindow.getFocusedWindow() ?? mainWindow;
     if (!win) throw new Error("The app window is not available.");
-    await win.webContents.downloadURL(args.url);
+    pendingFilenames.push(args.filename);
+    try { await win.webContents.downloadURL(args.url); }
+    catch (error) { pendingFilenames.pop(); throw error; }
     return { id: "starting" };
   });
   ipcMain.handle("downloads:pause", (_event, id: string) => activeDownloads.get(id)?.pause());
@@ -68,7 +72,8 @@ app.whenReady().then(() => {
     return downloadDirectory;
   });
   ipcMain.handle("downloads:open-file", async (_event, filePath: string) => {
-    if (!filePath || !path.resolve(filePath).startsWith(path.resolve(downloadDirectory))) throw new Error("File is outside the selected downloads folder.");
+    const relativePath = path.relative(path.resolve(downloadDirectory), path.resolve(filePath));
+    if (!filePath || !relativePath || relativePath.startsWith("..") || path.isAbsolute(relativePath)) throw new Error("File is outside the selected downloads folder.");
     const error = await shell.openPath(filePath);
     if (error) throw new Error(error);
   });
